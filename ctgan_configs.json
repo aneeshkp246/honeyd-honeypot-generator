@@ -1,0 +1,902 @@
+[
+  {
+    "proto": "tcp",
+    "service": "ftp-data",
+    "state": "Wyoming",
+    "spkts": 48,
+    "dpkts": 360,
+    "sbytes": 540,
+    "dbytes": 16552
+  },
+  {
+    "proto": "wsn",
+    "service": "-",
+    "state": "Pennsylvania",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 556,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "-",
+    "state": "Kentucky",
+    "spkts": 10,
+    "dpkts": 1,
+    "sbytes": 6148,
+    "dbytes": 772
+  },
+  {
+    "proto": "ggp",
+    "service": "dns",
+    "state": "Arizona",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 648,
+    "dbytes": 479
+  },
+  {
+    "proto": "tcp",
+    "service": "smtp",
+    "state": "Missouri",
+    "spkts": 10,
+    "dpkts": 46,
+    "sbytes": 21442,
+    "dbytes": 1005
+  },
+  {
+    "proto": "cftp",
+    "service": "-",
+    "state": "Utah",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 228,
+    "dbytes": 0
+  },
+  {
+    "proto": "udp",
+    "service": "snmp",
+    "state": "Missouri",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 842,
+    "dbytes": 162
+  },
+  {
+    "proto": "tcp",
+    "service": "ssl",
+    "state": "Idaho",
+    "spkts": 12,
+    "dpkts": 7,
+    "sbytes": 2513,
+    "dbytes": 2962
+  },
+  {
+    "proto": "tcp",
+    "service": "ssh",
+    "state": "Georgia",
+    "spkts": 58,
+    "dpkts": 22,
+    "sbytes": 10398,
+    "dbytes": 12537
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Delaware",
+    "spkts": 13,
+    "dpkts": 7,
+    "sbytes": 2108,
+    "dbytes": 27575
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp-data",
+    "state": "Louisiana",
+    "spkts": 9,
+    "dpkts": 9,
+    "sbytes": 338,
+    "dbytes": 2376
+  },
+  {
+    "proto": "udp",
+    "service": "snmp",
+    "state": "Arkansas",
+    "spkts": 4,
+    "dpkts": 1,
+    "sbytes": 24,
+    "dbytes": 408
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "California",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 895,
+    "dbytes": 60
+  },
+  {
+    "proto": "tcp",
+    "service": "smtp",
+    "state": "New York",
+    "spkts": 26,
+    "dpkts": 18,
+    "sbytes": 5674,
+    "dbytes": 1204
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp",
+    "state": "Connecticut",
+    "spkts": 17,
+    "dpkts": 14,
+    "sbytes": 1553,
+    "dbytes": 755
+  },
+  {
+    "proto": "sccopmce",
+    "service": "-",
+    "state": "Arizona",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 410,
+    "dbytes": 0
+  },
+  {
+    "proto": "unas",
+    "service": "-",
+    "state": "Nebraska",
+    "spkts": 2,
+    "dpkts": 3,
+    "sbytes": 77,
+    "dbytes": 225
+  },
+  {
+    "proto": "trunk-1",
+    "service": "-",
+    "state": "South Dakota",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 471,
+    "dbytes": 220
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp",
+    "state": "Tennessee",
+    "spkts": 12,
+    "dpkts": 48,
+    "sbytes": 1988,
+    "dbytes": 1194
+  },
+  {
+    "proto": "tcp",
+    "service": "ssl",
+    "state": "Georgia",
+    "spkts": 63,
+    "dpkts": 8,
+    "sbytes": 7393,
+    "dbytes": 2208
+  },
+  {
+    "proto": "vines",
+    "service": "-",
+    "state": "California",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 732,
+    "dbytes": 0
+  },
+  {
+    "proto": "idpr-cmtp",
+    "service": "-",
+    "state": "Rhode Island",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 116,
+    "dbytes": 111
+  },
+  {
+    "proto": "trunk-2",
+    "service": "-",
+    "state": "Montana",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 30
+  },
+  {
+    "proto": "ipip",
+    "service": "-",
+    "state": "Missouri",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 512,
+    "dbytes": 161
+  },
+  {
+    "proto": "ifmp",
+    "service": "-",
+    "state": "Connecticut",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 627,
+    "dbytes": 0
+  },
+  {
+    "proto": "udp",
+    "service": "dhcp",
+    "state": "Oklahoma",
+    "spkts": 5,
+    "dpkts": 1,
+    "sbytes": 815,
+    "dbytes": 1246
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "North Dakota",
+    "spkts": 9,
+    "dpkts": 8,
+    "sbytes": 1097,
+    "dbytes": 1099
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp-data",
+    "state": "Nebraska",
+    "spkts": 7,
+    "dpkts": 30,
+    "sbytes": 24,
+    "dbytes": 31519
+  },
+  {
+    "proto": "tcp",
+    "service": "-",
+    "state": "Wyoming",
+    "spkts": 1,
+    "dpkts": 1,
+    "sbytes": 49,
+    "dbytes": 962
+  },
+  {
+    "proto": "rsvp",
+    "service": "-",
+    "state": "Arizona",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 236,
+    "dbytes": 22
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp-data",
+    "state": "New Hampshire",
+    "spkts": 5,
+    "dpkts": 1,
+    "sbytes": 1498,
+    "dbytes": 1427
+  },
+  {
+    "proto": "tcp",
+    "service": "pop3",
+    "state": "Oklahoma",
+    "spkts": 70,
+    "dpkts": 23,
+    "sbytes": 1420,
+    "dbytes": 78050
+  },
+  {
+    "proto": "idpr",
+    "service": "-",
+    "state": "Idaho",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 666,
+    "dbytes": 0
+  },
+  {
+    "proto": "srp",
+    "service": "-",
+    "state": "South Carolina",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 534
+  },
+  {
+    "proto": "udp",
+    "service": "-",
+    "state": "South Dakota",
+    "spkts": 1,
+    "dpkts": 1,
+    "sbytes": 629,
+    "dbytes": 77
+  },
+  {
+    "proto": "udp",
+    "service": "snmp",
+    "state": "New Mexico",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 416,
+    "dbytes": 0
+  },
+  {
+    "proto": "dgp",
+    "service": "-",
+    "state": "Maine",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 840,
+    "dbytes": 281
+  },
+  {
+    "proto": "mtp",
+    "service": "-",
+    "state": "Massachusetts",
+    "spkts": 3,
+    "dpkts": 1,
+    "sbytes": 1190,
+    "dbytes": 304
+  },
+  {
+    "proto": "tp++",
+    "service": "-",
+    "state": "Iowa",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 836,
+    "dbytes": 0
+  },
+  {
+    "proto": "dcn",
+    "service": "-",
+    "state": "Alabama",
+    "spkts": 3,
+    "dpkts": 0,
+    "sbytes": 284,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp",
+    "state": "Massachusetts",
+    "spkts": 20,
+    "dpkts": 24,
+    "sbytes": 951,
+    "dbytes": 1524
+  },
+  {
+    "proto": "dgp",
+    "service": "-",
+    "state": "New Jersey",
+    "spkts": 3,
+    "dpkts": 0,
+    "sbytes": 437,
+    "dbytes": 328
+  },
+  {
+    "proto": "any",
+    "service": "-",
+    "state": "West Virginia",
+    "spkts": 1,
+    "dpkts": 1,
+    "sbytes": 68,
+    "dbytes": 760
+  },
+  {
+    "proto": "tcp",
+    "service": "smtp",
+    "state": "South Dakota",
+    "spkts": 24,
+    "dpkts": 30,
+    "sbytes": 32099,
+    "dbytes": 0
+  },
+  {
+    "proto": "wb-expak",
+    "service": "-",
+    "state": "Utah",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 731,
+    "dbytes": 0
+  },
+  {
+    "proto": "ipv6-frag",
+    "service": "-",
+    "state": "Rhode Island",
+    "spkts": 3,
+    "dpkts": 0,
+    "sbytes": 921,
+    "dbytes": 254
+  },
+  {
+    "proto": "ax.25",
+    "service": "-",
+    "state": "Virginia",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 289,
+    "dbytes": 0
+  },
+  {
+    "proto": "crtp",
+    "service": "-",
+    "state": "Alaska",
+    "spkts": 6,
+    "dpkts": 0,
+    "sbytes": 154,
+    "dbytes": 606
+  },
+  {
+    "proto": "tcp",
+    "service": "smtp",
+    "state": "Arkansas",
+    "spkts": 29,
+    "dpkts": 36,
+    "sbytes": 64279,
+    "dbytes": 1564
+  },
+  {
+    "proto": "tcp",
+    "service": "-",
+    "state": "Maryland",
+    "spkts": 5,
+    "dpkts": 10,
+    "sbytes": 853,
+    "dbytes": 676
+  },
+  {
+    "proto": "sun-nd",
+    "service": "-",
+    "state": "Mississippi",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 293,
+    "dbytes": 145
+  },
+  {
+    "proto": "tcp",
+    "service": "ssl",
+    "state": "Maine",
+    "spkts": 11,
+    "dpkts": 9,
+    "sbytes": 1828,
+    "dbytes": 1631
+  },
+  {
+    "proto": "iatp",
+    "service": "-",
+    "state": "Wisconsin",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 720,
+    "dbytes": 327
+  },
+  {
+    "proto": "hmp",
+    "service": "-",
+    "state": "Indiana",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 120,
+    "dbytes": 0
+  },
+  {
+    "proto": "isis",
+    "service": "-",
+    "state": "Michigan",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 205,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "ssh",
+    "state": "Virginia",
+    "spkts": 74,
+    "dpkts": 85,
+    "sbytes": 10290,
+    "dbytes": 14482
+  },
+  {
+    "proto": "ddp",
+    "service": "-",
+    "state": "Hawaii",
+    "spkts": 5,
+    "dpkts": 1,
+    "sbytes": 582,
+    "dbytes": 661
+  },
+  {
+    "proto": "idrp",
+    "service": "-",
+    "state": "South Dakota",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 473,
+    "dbytes": 208
+  },
+  {
+    "proto": "eigrp",
+    "service": "-",
+    "state": "Wisconsin",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 846,
+    "dbytes": 727
+  },
+  {
+    "proto": "prm",
+    "service": "-",
+    "state": "Tennessee",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 631,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Washington",
+    "spkts": 11,
+    "dpkts": 7,
+    "sbytes": 1388,
+    "dbytes": 23948
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Kentucky",
+    "spkts": 3,
+    "dpkts": 1,
+    "sbytes": 514,
+    "dbytes": 641
+  },
+  {
+    "proto": "ipip",
+    "service": "-",
+    "state": "Kansas",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 179,
+    "dbytes": 26
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Virginia",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 62,
+    "dbytes": 39
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp",
+    "state": "Virginia",
+    "spkts": 12,
+    "dpkts": 47,
+    "sbytes": 1691,
+    "dbytes": 2855
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Maine",
+    "spkts": 8,
+    "dpkts": 6,
+    "sbytes": 1835,
+    "dbytes": 490
+  },
+  {
+    "proto": "ipv6",
+    "service": "-",
+    "state": "Georgia",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 942,
+    "dbytes": 260
+  },
+  {
+    "proto": "sctp",
+    "service": "-",
+    "state": "Arkansas",
+    "spkts": 3,
+    "dpkts": 0,
+    "sbytes": 800,
+    "dbytes": 89
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp-data",
+    "state": "Georgia",
+    "spkts": 4,
+    "dpkts": 6,
+    "sbytes": 30,
+    "dbytes": 1183
+  },
+  {
+    "proto": "udp",
+    "service": "-",
+    "state": "Utah",
+    "spkts": 1,
+    "dpkts": 4,
+    "sbytes": 24,
+    "dbytes": 640
+  },
+  {
+    "proto": "micp",
+    "service": "-",
+    "state": "Arizona",
+    "spkts": 5,
+    "dpkts": 0,
+    "sbytes": 770,
+    "dbytes": 619
+  },
+  {
+    "proto": "any",
+    "service": "-",
+    "state": "Minnesota",
+    "spkts": 1,
+    "dpkts": 1,
+    "sbytes": 480,
+    "dbytes": 424
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Georgia",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 702,
+    "dbytes": 371
+  },
+  {
+    "proto": "tcp",
+    "service": "ssl",
+    "state": "New York",
+    "spkts": 15,
+    "dpkts": 5,
+    "sbytes": 6580,
+    "dbytes": 1995
+  },
+  {
+    "proto": "tcp",
+    "service": "ssh",
+    "state": "West Virginia",
+    "spkts": 76,
+    "dpkts": 77,
+    "sbytes": 14804,
+    "dbytes": 15387
+  },
+  {
+    "proto": "xns-idp",
+    "service": "-",
+    "state": "Wyoming",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 233,
+    "dbytes": 157
+  },
+  {
+    "proto": "unas",
+    "service": "-",
+    "state": "South Carolina",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 165
+  },
+  {
+    "proto": "tcp",
+    "service": "smtp",
+    "state": "Alaska",
+    "spkts": 41,
+    "dpkts": 21,
+    "sbytes": 61344,
+    "dbytes": 2053
+  },
+  {
+    "proto": "mobile",
+    "service": "-",
+    "state": "Massachusetts",
+    "spkts": 1,
+    "dpkts": 6,
+    "sbytes": 24,
+    "dbytes": 0
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Indiana",
+    "spkts": 3,
+    "dpkts": 0,
+    "sbytes": 1103,
+    "dbytes": 585
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Delaware",
+    "spkts": 9,
+    "dpkts": 8,
+    "sbytes": 704,
+    "dbytes": 961
+  },
+  {
+    "proto": "tcp",
+    "service": "ssh",
+    "state": "New York",
+    "spkts": 70,
+    "dpkts": 40,
+    "sbytes": 11348,
+    "dbytes": 15652
+  },
+  {
+    "proto": "pim",
+    "service": "-",
+    "state": "Connecticut",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 37,
+    "dbytes": 454
+  },
+  {
+    "proto": "tcp",
+    "service": "pop3",
+    "state": "Idaho",
+    "spkts": 68,
+    "dpkts": 41,
+    "sbytes": 2047,
+    "dbytes": 254660
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Georgia",
+    "spkts": 8,
+    "dpkts": 6,
+    "sbytes": 1214,
+    "dbytes": 3833
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Wyoming",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 853,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "ssh",
+    "state": "South Dakota",
+    "spkts": 44,
+    "dpkts": 29,
+    "sbytes": 9586,
+    "dbytes": 12805
+  },
+  {
+    "proto": "leaf-1",
+    "service": "-",
+    "state": "Hawaii",
+    "spkts": 5,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 0
+  },
+  {
+    "proto": "rsvp",
+    "service": "-",
+    "state": "Nebraska",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 648,
+    "dbytes": 198
+  },
+  {
+    "proto": "tcp",
+    "service": "ftp",
+    "state": "Georgia",
+    "spkts": 80,
+    "dpkts": 42,
+    "sbytes": 1746,
+    "dbytes": 2137
+  },
+  {
+    "proto": "ddx",
+    "service": "-",
+    "state": "Tennessee",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 221
+  },
+  {
+    "proto": "micp",
+    "service": "-",
+    "state": "Michigan",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 153,
+    "dbytes": 62
+  },
+  {
+    "proto": "udp",
+    "service": "dns",
+    "state": "Nevada",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 97,
+    "dbytes": 114
+  },
+  {
+    "proto": "mtp",
+    "service": "-",
+    "state": "Montana",
+    "spkts": 2,
+    "dpkts": 0,
+    "sbytes": 703,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "http",
+    "state": "Alaska",
+    "spkts": 75,
+    "dpkts": 385,
+    "sbytes": 5101,
+    "dbytes": 44474
+  },
+  {
+    "proto": "dgp",
+    "service": "-",
+    "state": "New Jersey",
+    "spkts": 4,
+    "dpkts": 0,
+    "sbytes": 364,
+    "dbytes": 19
+  },
+  {
+    "proto": "cphb",
+    "service": "-",
+    "state": "Rhode Island",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 24,
+    "dbytes": 0
+  },
+  {
+    "proto": "igp",
+    "service": "-",
+    "state": "New Hampshire",
+    "spkts": 1,
+    "dpkts": 0,
+    "sbytes": 807,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "-",
+    "state": "Alaska",
+    "spkts": 11,
+    "dpkts": 5,
+    "sbytes": 1496,
+    "dbytes": 0
+  },
+  {
+    "proto": "tcp",
+    "service": "pop3",
+    "state": "Washington",
+    "spkts": 11,
+    "dpkts": 39,
+    "sbytes": 803,
+    "dbytes": 69114
+  }
+]

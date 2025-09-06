@@ -1,0 +1,80 @@
+{
+  "ctgan_samples": [
+    {
+      "proto": "tcp",
+      "service": "ftp-data",
+      "state": "Wyoming",
+      "spkts": 4,
+      "dpkts": 7,
+      "sbytes": 24,
+      "dbytes": 1519
+    },
+    {
+      "proto": "wsn",
+      "service": "-",
+      "state": "Pennsylvania",
+      "spkts": 1,
+      "dpkts": 0,
+      "sbytes": 1516,
+      "dbytes": 0
+    },
+    {
+      "proto": "tcp",
+      "service": "-",
+      "state": "Kentucky",
+      "spkts": 3,
+      "dpkts": 10,
+      "sbytes": 694,
+      "dbytes": 195
+    },
+    {
+      "proto": "ggp",
+      "service": "-",
+      "state": "Arizona",
+      "spkts": 2,
+      "dpkts": 0,
+      "sbytes": 610,
+      "dbytes": 337
+    },
+    {
+      "proto": "tcp",
+      "service": "smtp",
+      "state": "Missouri",
+      "spkts": 34,
+      "dpkts": 57,
+      "sbytes": 96734,
+      "dbytes": 11459
+    },
+    {
+      "proto": "cftp",
+      "service": "-",
+      "state": "Utah",
+      "spkts": 1,
+      "dpkts": 0,
+      "sbytes": 48,
+      "dbytes": 0
+    },
+    {
+      "proto": "udp",
+      "service": "snmp",
+      "state": "Missouri",
+      "spkts": 1,
+      "dpkts": 0,
+      "sbytes": 731,
+      "dbytes": 0
+    },
+    {
+      "proto": "tcp",
+      "service": "ssl",
+      "state": "Idaho",
+      "spkts": 7,
+      "dpkts": 39,
+      "sbytes": 9821,
+      "dbytes": 9913
+    }
+  ],
+  "services": [
+    "dns",
+    "telnet"
+  ]
+}

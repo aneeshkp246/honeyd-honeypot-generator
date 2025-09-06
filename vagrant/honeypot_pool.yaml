@@ -1,0 +1,1077 @@
+honeypots:
+- ip: 10.10.10.10
+  os: FreeBSD
+  template: template0
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.11
+  os: OpenBSD
+  template: template1
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.12
+  os: Windows XP
+  template: template2
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.13
+  os: Solaris
+  template: template3
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.14
+  os: Linux 2.6.x
+  template: template4
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.15
+  os: Linux 2.6.x
+  template: template5
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.16
+  os: Windows 7
+  template: template6
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.17
+  os: Linux 2.6.x
+  template: template7
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.18
+  os: OpenBSD
+  template: template8
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.19
+  os: Linux 2.6.x
+  template: template9
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.20
+  os: OpenBSD
+  template: template10
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.21
+  os: Windows XP
+  template: template11
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.22
+  os: Windows XP
+  template: template12
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.23
+  os: Windows 7
+  template: template13
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.24
+  os: Linux 2.6.x
+  template: template14
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.25
+  os: FreeBSD
+  template: template15
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.26
+  os: Windows XP
+  template: template16
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.27
+  os: Windows 10
+  template: template17
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.28
+  os: Solaris
+  template: template18
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.29
+  os: Solaris
+  template: template19
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.30
+  os: Windows XP
+  template: template20
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.31
+  os: Windows XP
+  template: template21
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.32
+  os: Windows 7
+  template: template22
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.33
+  os: Solaris
+  template: template23
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.34
+  os: FreeBSD
+  template: template24
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.35
+  os: Windows 10
+  template: template25
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.36
+  os: Windows XP
+  template: template26
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.37
+  os: Windows XP
+  template: template27
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.38
+  os: FreeBSD
+  template: template28
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.39
+  os: FreeBSD
+  template: template29
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.40
+  os: OpenBSD
+  template: template30
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.41
+  os: Windows 7
+  template: template31
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.42
+  os: Solaris
+  template: template32
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.43
+  os: Windows 10
+  template: template33
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.44
+  os: Solaris
+  template: template34
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.45
+  os: Linux 2.6.x
+  template: template35
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.46
+  os: OpenBSD
+  template: template36
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.47
+  os: Windows 7
+  template: template37
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.48
+  os: Solaris
+  template: template38
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.49
+  os: OpenBSD
+  template: template39
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.50
+  os: OpenBSD
+  template: template40
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.51
+  os: Solaris
+  template: template41
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.52
+  os: Windows 7
+  template: template42
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.53
+  os: Linux 2.6.x
+  template: template43
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.54
+  os: Windows XP
+  template: template44
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.55
+  os: Linux 2.6.x
+  template: template45
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.56
+  os: Windows 10
+  template: template46
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.57
+  os: Solaris
+  template: template47
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.58
+  os: OpenBSD
+  template: template48
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.59
+  os: Windows 10
+  template: template49
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.60
+  os: Windows 7
+  template: template50
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.61
+  os: Solaris
+  template: template51
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.62
+  os: Windows 10
+  template: template52
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.63
+  os: FreeBSD
+  template: template53
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.64
+  os: Linux 2.6.x
+  template: template54
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.65
+  os: Windows 10
+  template: template55
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.66
+  os: Solaris
+  template: template56
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.67
+  os: OpenBSD
+  template: template57
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.68
+  os: FreeBSD
+  template: template58
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.69
+  os: Windows 10
+  template: template59
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.70
+  os: Windows 10
+  template: template60
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.71
+  os: Windows 7
+  template: template61
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.72
+  os: Windows 10
+  template: template62
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.73
+  os: OpenBSD
+  template: template63
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.74
+  os: Windows 7
+  template: template64
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.75
+  os: Windows 7
+  template: template65
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.76
+  os: Solaris
+  template: template66
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.77
+  os: OpenBSD
+  template: template67
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.78
+  os: Windows 7
+  template: template68
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.79
+  os: Windows 10
+  template: template69
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.80
+  os: Linux 2.6.x
+  template: template70
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.81
+  os: Windows XP
+  template: template71
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.82
+  os: Windows XP
+  template: template72
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.83
+  os: Linux 2.6.x
+  template: template73
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.84
+  os: Windows 10
+  template: template74
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.85
+  os: Solaris
+  template: template75
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.86
+  os: Linux 2.6.x
+  template: template76
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.87
+  os: Windows XP
+  template: template77
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.88
+  os: Windows 10
+  template: template78
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+- ip: 10.10.10.89
+  os: Windows 10
+  template: template79
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.90
+  os: OpenBSD
+  template: template80
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.91
+  os: FreeBSD
+  template: template81
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.92
+  os: Windows 7
+  template: template82
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.93
+  os: Windows 10
+  template: template83
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.94
+  os: Windows 10
+  template: template84
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.95
+  os: Windows 7
+  template: template85
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.96
+  os: Solaris
+  template: template86
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.97
+  os: FreeBSD
+  template: template87
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+- ip: 10.10.10.98
+  os: Windows XP
+  template: template88
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.99
+  os: Windows 10
+  template: template89
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.100
+  os: FreeBSD
+  template: template90
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.101
+  os: Linux 2.6.x
+  template: template91
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.102
+  os: Windows XP
+  template: template92
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.103
+  os: FreeBSD
+  template: template93
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.104
+  os: FreeBSD
+  template: template94
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.105
+  os: Windows XP
+  template: template95
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+- ip: 10.10.10.106
+  os: Windows 10
+  template: template96
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.107
+  os: FreeBSD
+  template: template97
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.108
+  os: FreeBSD
+  template: template98
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+- ip: 10.10.10.109
+  os: Linux 2.6.x
+  template: template99
+  services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py

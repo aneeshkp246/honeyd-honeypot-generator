@@ -1,0 +1,16 @@
+# Core scientific stack
+numpy>=1.23
+pandas>=1.5
+scipy>=1.9
+scikit-learn>=1.1
+matplotlib>=3.7
+tqdm>=4.65
+psutil>=5.9
+
+# Deep learning
+tensorflow>=2.10
+
+# Synthetic data (SDV suite, includes CTGAN)
+sdv==1.10.0
+rdt>=1.8.0
+faker>=18.0
