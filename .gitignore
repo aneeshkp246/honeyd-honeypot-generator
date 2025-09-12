@@ -15,7 +15,6 @@ ENV/
 # Dataset files (these are usually large)
 *.csv
 *.pkl
-UNSW_NB15_training-set.csv
 
 # Log files
 log/

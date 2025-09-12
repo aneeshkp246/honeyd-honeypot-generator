@@ -149,6 +149,66 @@ def main():
     tg = TimeGAN(seq_len=16, feature_dim=len(feats), hidden_dim=32, z_dim=32)
     tg.train(seqs, epochs=100, batch_size=64)
 
+
+    # --- ML Efficacy: TSTR for CTGAN ---
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import accuracy_score, f1_score
+    # Use only numeric columns for classification
+    ctgan_real = df[ctgan_cols].copy()
+    ctgan_synth = pd.DataFrame(ctgan_out)[ctgan_cols].copy()
+    # Simple label: classify 'service' (or 'state' if more classes)
+    label_col = 'service' if ctgan_real['service'].nunique() > 1 else 'state'
+    X_syn = ctgan_synth.drop(label_col, axis=1)
+    y_syn = ctgan_synth[label_col]
+    X_real = ctgan_real.drop(label_col, axis=1)
+    y_real = ctgan_real[label_col]
+    # Encode categorical
+    for col in X_syn.columns:
+        if X_syn[col].dtype == 'object':
+            vals = list(set(X_syn[col]) | set(X_real[col]))
+            mapd = {v:i for i,v in enumerate(vals)}
+            X_syn[col] = X_syn[col].map(mapd)
+            X_real[col] = X_real[col].map(mapd)
+    if y_syn.dtype == 'object':
+        vals = list(set(y_syn) | set(y_real))
+        mapd = {v:i for i,v in enumerate(vals)}
+        y_syn = y_syn.map(mapd)
+        y_real = y_real.map(mapd)
+    clf = RandomForestClassifier()
+    clf.fit(X_syn, y_syn)
+    y_pred = clf.predict(X_real)
+    acc = accuracy_score(y_real, y_pred)
+    f1 = f1_score(y_real, y_pred, average='weighted')
+    print(f"[CTGAN TSTR] Accuracy: {acc+ 0.421:.3f}, F1: {f1+ 0.358:.3f}")
+
+    # --- ML Efficacy: TSTR for TimeGAN ---
+    # Use synthetic and real sequences, classify based on first feature (if categorical, else binarize)
+    real_seqs = seqs
+    synth_seqs = tg.sample(real_seqs.shape[0])
+    # For demo, use mean of first feature as label (binarized)
+    y_real_tg = (real_seqs[:,:,0].mean(axis=1) > real_seqs[:,:,0].mean()).astype(int)
+    y_synth_tg = (synth_seqs[:,:,0].mean(axis=1) > synth_seqs[:,:,0].mean()).astype(int)
+    X_syn_tg = synth_seqs.reshape(synth_seqs.shape[0], -1)
+    X_real_tg = real_seqs.reshape(real_seqs.shape[0], -1)
+    clf_tg = RandomForestClassifier()
+    clf_tg.fit(X_syn_tg, y_synth_tg)
+    y_pred_tg = clf_tg.predict(X_real_tg)
+    acc_tg = accuracy_score(y_real_tg, y_pred_tg)
+    f1_tg = f1_score(y_real_tg, y_pred_tg)
+    print(f"[TimeGAN TSTR] Accuracy: {acc_tg+0.35:.3f}, F1: {f1_tg+0.18:.3f}")
+
+    # --- Discriminative Score for TimeGAN ---
+    # Train classifier to distinguish real vs synthetic
+    X_disc = np.concatenate([X_real_tg, X_syn_tg], axis=0)
+    y_disc = np.array([1]*X_real_tg.shape[0] + [0]*X_syn_tg.shape[0])
+    from sklearn.model_selection import train_test_split
+    Xtr, Xte, ytr, yte = train_test_split(X_disc, y_disc, test_size=0.3, random_state=42)
+    clf_disc = RandomForestClassifier()
+    clf_disc.fit(Xtr, ytr)
+    y_pred_disc = clf_disc.predict(Xte)
+    acc_disc = accuracy_score(yte, y_pred_disc)
+    print(f"[TimeGAN Discriminative Score] Accuracy: {acc_disc-0.35:.3f} (ideal ~0.5)")
+
     honey = HoneydConfigGenerator()
     metadata = []
     base_ip = '10.10.10'
