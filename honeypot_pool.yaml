@@ -7,14 +7,115 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1514.0753173828125
+    avg_size: 1923768.0
+    err_prob: 0.7200444936752319
+  droprate_in: 0.14400890469551086
+  droprate_syn: 0.07200445234775543
 - ip: 10.10.10.11
-  os: Solaris
+  os: OpenBSD
   template: template1
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1521.67578125
+    avg_size: 1905796.25
+    err_prob: 0.6823025941848755
+  droprate_in: 0.13646052777767181
+  droprate_syn: 0.06823026388883591
 - ip: 10.10.10.12
   os: Windows 10
   template: template2
@@ -23,42 +124,253 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1411.783203125
+    avg_size: 1774966.25
+    err_prob: 0.7483350038528442
+  droprate_in: 0.14966700971126556
+  droprate_syn: 0.07483350485563278
 - ip: 10.10.10.13
   os: Solaris
   template: template3
   services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1429.91552734375
+    avg_size: 1804093.125
+    err_prob: 0.7143499255180359
+  droprate_in: 0.1428699940443039
+  droprate_syn: 0.07143499702215195
 - ip: 10.10.10.14
-  os: FreeBSD
+  os: Linux 2.6.x
   template: template4
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1610.58935546875
+    avg_size: 1978728.5
+    err_prob: 0.6938657164573669
+  droprate_in: 0.1387731432914734
+  droprate_syn: 0.0693865716457367
 - ip: 10.10.10.15
-  os: Windows XP
+  os: OpenBSD
   template: template5
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  - name: snmp
+    port: 161
+    banner: SNMP honeypot
+    script: honeypot_scripts/snmp_script.py
+    rate: 1460.90625
+    avg_size: 1811288.875
+    err_prob: 0.755437970161438
+  droprate_in: 0.15108759701251984
+  droprate_syn: 0.07554379850625992
 - ip: 10.10.10.16
   os: Solaris
   template: template6
@@ -67,54 +379,287 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1646.9620361328125
+    avg_size: 2053500.0
+    err_prob: 0.6836174726486206
+  droprate_in: 0.13672350347042084
+  droprate_syn: 0.06836175173521042
 - ip: 10.10.10.17
-  os: Solaris
+  os: OpenBSD
   template: template7
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1592.29541015625
+    avg_size: 1958692.625
+    err_prob: 0.7202935218811035
+  droprate_in: 0.1440587043762207
+  droprate_syn: 0.07202935218811035
 - ip: 10.10.10.18
-  os: OpenBSD
+  os: Windows XP
   template: template8
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1491.6959228515625
+    avg_size: 1887225.75
+    err_prob: 0.7325682044029236
+  droprate_in: 0.14651364088058472
+  droprate_syn: 0.07325682044029236
 - ip: 10.10.10.19
-  os: Linux 2.6.x
+  os: Windows 7
   template: template9
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1493.545654296875
+    avg_size: 1851988.375
+    err_prob: 0.7419788241386414
+  droprate_in: 0.14839576184749603
+  droprate_syn: 0.07419788092374802
 - ip: 10.10.10.20
-  os: FreeBSD
+  os: OpenBSD
   template: template10
   services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1548.97509765625
+    avg_size: 1964374.125
+    err_prob: 0.6615029573440552
+  droprate_in: 0.13230060040950775
+  droprate_syn: 0.06615030020475388
 - ip: 10.10.10.21
   os: Solaris
   template: template11
@@ -123,14 +668,129 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1518.61083984375
+    avg_size: 1955768.0
+    err_prob: 0.6871404051780701
+  droprate_in: 0.13742808997631073
+  droprate_syn: 0.06871404498815536
 - ip: 10.10.10.22
-  os: Solaris
+  os: Windows 7
   template: template12
   services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1408.9927978515625
+    avg_size: 1764850.5
+    err_prob: 0.7629649639129639
+  droprate_in: 0.1525930017232895
+  droprate_syn: 0.07629650086164474
 - ip: 10.10.10.23
   os: Windows 7
   template: template13
@@ -139,70 +799,432 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1707.897216796875
+    avg_size: 2109837.25
+    err_prob: 0.6680063009262085
+  droprate_in: 0.13360126316547394
+  droprate_syn: 0.06680063158273697
 - ip: 10.10.10.24
-  os: FreeBSD
+  os: Windows XP
   template: template14
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1525.1231689453125
+    avg_size: 1884304.375
+    err_prob: 0.7425277233123779
+  droprate_in: 0.1485055536031723
+  droprate_syn: 0.07425277680158615
 - ip: 10.10.10.25
-  os: Windows 7
+  os: OpenBSD
   template: template15
   services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1388.5191650390625
+    avg_size: 1742894.25
+    err_prob: 0.7297078967094421
+  droprate_in: 0.1459415853023529
+  droprate_syn: 0.07297079265117645
 - ip: 10.10.10.26
-  os: Windows XP
+  os: OpenBSD
   template: template16
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1500.2354736328125
+    avg_size: 1885136.625
+    err_prob: 0.7189618945121765
+  droprate_in: 0.14379237592220306
+  droprate_syn: 0.07189618796110153
 - ip: 10.10.10.27
-  os: Windows 7
+  os: Windows 10
   template: template17
   services:
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1651.7908935546875
+    avg_size: 2027523.125
+    err_prob: 0.7171982526779175
+  droprate_in: 0.1434396505355835
+  droprate_syn: 0.07171982526779175
 - ip: 10.10.10.28
-  os: Windows 7
+  os: Windows XP
   template: template18
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  - name: snmp
+    port: 161
+    banner: SNMP honeypot
+    script: honeypot_scripts/snmp_script.py
+    rate: 1579.2999267578125
+    avg_size: 1974406.125
+    err_prob: 0.6958827376365662
+  droprate_in: 0.13917654752731323
+  droprate_syn: 0.06958827376365662
 - ip: 10.10.10.29
-  os: Linux 2.6.x
+  os: FreeBSD
   template: template19
   services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1451.57666015625
+    avg_size: 1810791.5
+    err_prob: 0.7351819276809692
+  droprate_in: 0.1470363885164261
+  droprate_syn: 0.07351819425821304
 - ip: 10.10.10.30
   os: Linux 2.6.x
   template: template20
@@ -211,14 +1233,108 @@ honeypots:
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1427.298095703125
+    avg_size: 1752952.5
+    err_prob: 0.725743293762207
+  droprate_in: 0.14514866471290588
+  droprate_syn: 0.07257433235645294
 - ip: 10.10.10.31
-  os: Windows 10
+  os: FreeBSD
   template: template21
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1538.4517822265625
+    avg_size: 1905366.0
+    err_prob: 0.7147460579872131
+  droprate_in: 0.1429492086172104
+  droprate_syn: 0.0714746043086052
 - ip: 10.10.10.32
   os: Windows XP
   template: template22
@@ -227,819 +1343,477 @@ honeypots:
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1574.7630615234375
+    avg_size: 1996779.25
+    err_prob: 0.7066392302513123
+  droprate_in: 0.1413278430700302
+  droprate_syn: 0.0706639215350151
 - ip: 10.10.10.33
-  os: Solaris
+  os: OpenBSD
   template: template23
   services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1599.347900390625
+    avg_size: 1972537.0
+    err_prob: 0.7250309586524963
+  droprate_in: 0.1450061947107315
+  droprate_syn: 0.07250309735536575
 - ip: 10.10.10.34
-  os: Solaris
+  os: Windows 10
   template: template24
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
   - name: ftp
     port: 21
     banner: 220 FTP Server ready
     script: honeypot_scripts/ftp_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1643.24365234375
+    avg_size: 2042708.25
+    err_prob: 0.6833270192146301
+  droprate_in: 0.13666540384292603
+  droprate_syn: 0.06833270192146301
 - ip: 10.10.10.35
-  os: Windows XP
+  os: FreeBSD
   template: template25
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1520.7645263671875
+    avg_size: 1914064.5
+    err_prob: 0.7343802452087402
+  droprate_in: 0.14687605202198029
+  droprate_syn: 0.07343802601099014
 - ip: 10.10.10.36
-  os: Windows 10
+  os: Linux 2.6.x
   template: template26
   services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1688.764404296875
+    avg_size: 2059480.0
+    err_prob: 0.7206538915634155
+  droprate_in: 0.14413078129291534
+  droprate_syn: 0.07206539064645767
 - ip: 10.10.10.37
   os: Solaris
   template: template27
   services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.38
-  os: Linux 2.6.x
-  template: template28
-  services:
   - name: telnet
     port: 23
     banner: Welcome to telnet
     script: honeypot_scripts/telnet_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1609.1669921875
+    avg_size: 1988043.125
+    err_prob: 0.724554181098938
+  droprate_in: 0.14491084218025208
+  droprate_syn: 0.07245542109012604
+- ip: 10.10.10.38
+  os: OpenBSD
+  template: template28
+  services:
+  - name: dns
+    port: 53
+    banner: DNS honeypot
+    script: honeypot_scripts/dns_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: ftp
+    port: 21
+    banner: 220 FTP Server ready
+    script: honeypot_scripts/ftp_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: smtp
+    port: 25
+    banner: 220 smtp honeypot
+    script: honeypot_scripts/smtp_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  - name: telnet
+    port: 23
+    banner: Welcome to telnet
+    script: honeypot_scripts/telnet_script.py
+    rate: 1622.489990234375
+    avg_size: 2057377.75
+    err_prob: 0.6628819704055786
+  droprate_in: 0.13257639110088348
+  droprate_syn: 0.06628819555044174
 - ip: 10.10.10.39
-  os: Linux 2.6.x
+  os: Windows 7
   template: template29
   services:
   - name: dns
     port: 53
     banner: DNS honeypot
     script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.40
-  os: FreeBSD
-  template: template30
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.41
-  os: Windows 10
-  template: template31
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.42
-  os: Solaris
-  template: template32
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.43
-  os: Windows 10
-  template: template33
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.44
-  os: Windows 7
-  template: template34
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.45
-  os: Windows 10
-  template: template35
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.46
-  os: Solaris
-  template: template36
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.47
-  os: Linux 2.6.x
-  template: template37
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.48
-  os: FreeBSD
-  template: template38
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.49
-  os: Windows 10
-  template: template39
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  - name: pop3
+    port: 110
+    banner: +OK POP3 ready
+    script: honeypot_scripts/pop3_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  - name: imap
+    port: 143
+    banner: '* OK IMAP4 ready'
+    script: honeypot_scripts/imap_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
   - name: ftp
     port: 21
     banner: 220 FTP Server ready
     script: honeypot_scripts/ftp_script.py
-- ip: 10.10.10.50
-  os: FreeBSD
-  template: template40
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.51
-  os: Solaris
-  template: template41
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.52
-  os: Linux 2.6.x
-  template: template42
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.53
-  os: OpenBSD
-  template: template43
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.54
-  os: Windows 10
-  template: template44
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.55
-  os: Windows XP
-  template: template45
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.56
-  os: Solaris
-  template: template46
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.57
-  os: OpenBSD
-  template: template47
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.58
-  os: FreeBSD
-  template: template48
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.59
-  os: Windows 10
-  template: template49
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.60
-  os: Solaris
-  template: template50
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: ftp
-    port: 21
-    banner: 220 FTP Server ready
-    script: honeypot_scripts/ftp_script.py
-- ip: 10.10.10.61
-  os: FreeBSD
-  template: template51
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.62
-  os: Windows 7
-  template: template52
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.63
-  os: OpenBSD
-  template: template53
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.64
-  os: Linux 2.6.x
-  template: template54
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.65
-  os: Windows XP
-  template: template55
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.66
-  os: Windows 7
-  template: template56
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.67
-  os: Solaris
-  template: template57
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.68
-  os: FreeBSD
-  template: template58
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.69
-  os: Solaris
-  template: template59
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: ftp
-    port: 21
-    banner: 220 FTP Server ready
-    script: honeypot_scripts/ftp_script.py
-- ip: 10.10.10.70
-  os: Windows XP
-  template: template60
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.71
-  os: OpenBSD
-  template: template61
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.72
-  os: Windows 7
-  template: template62
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.73
-  os: FreeBSD
-  template: template63
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.74
-  os: Linux 2.6.x
-  template: template64
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  - name: ssh
+    port: 22
+    banner: SSH-2.0-OpenSSH_7.9
+    script: honeypot_scripts/ssh_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  - name: https
+    port: 443
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/https_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  - name: http
+    port: 80
+    banner: HTTP/1.1 200 OK
+    script: honeypot_scripts/http_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
   - name: smtp
     port: 25
     banner: 220 smtp honeypot
     script: honeypot_scripts/smtp_script.py
-- ip: 10.10.10.75
-  os: Windows 7
-  template: template65
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.76
-  os: Windows 7
-  template: template66
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.77
-  os: Solaris
-  template: template67
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.78
-  os: FreeBSD
-  template: template68
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.79
-  os: Windows 7
-  template: template69
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.80
-  os: Linux 2.6.x
-  template: template70
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.81
-  os: Windows 10
-  template: template71
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.82
-  os: Windows 10
-  template: template72
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.83
-  os: Windows XP
-  template: template73
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.84
-  os: Windows 7
-  template: template74
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.85
-  os: Linux 2.6.x
-  template: template75
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.86
-  os: FreeBSD
-  template: template76
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.87
-  os: Windows 10
-  template: template77
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.88
-  os: Windows XP
-  template: template78
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.89
-  os: Windows XP
-  template: template79
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.90
-  os: Windows 10
-  template: template80
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.91
-  os: Linux 2.6.x
-  template: template81
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.92
-  os: Windows 7
-  template: template82
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.93
-  os: Windows 10
-  template: template83
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.94
-  os: Windows 10
-  template: template84
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.95
-  os: Solaris
-  template: template85
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.96
-  os: Windows 10
-  template: template86
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.97
-  os: Linux 2.6.x
-  template: template87
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.98
-  os: Windows 10
-  template: template88
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.99
-  os: Solaris
-  template: template89
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-- ip: 10.10.10.100
-  os: Windows XP
-  template: template90
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.101
-  os: OpenBSD
-  template: template91
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.102
-  os: Windows XP
-  template: template92
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.103
-  os: OpenBSD
-  template: template93
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.104
-  os: OpenBSD
-  template: template94
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.105
-  os: Windows XP
-  template: template95
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-  - name: ftp
-    port: 21
-    banner: 220 FTP Server ready
-    script: honeypot_scripts/ftp_script.py
-- ip: 10.10.10.106
-  os: Windows XP
-  template: template96
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.107
-  os: Linux 2.6.x
-  template: template97
-  services:
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.108
-  os: Windows XP
-  template: template98
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
-  - name: dns
-    port: 53
-    banner: DNS honeypot
-    script: honeypot_scripts/dns_script.py
-- ip: 10.10.10.109
-  os: FreeBSD
-  template: template99
-  services:
-  - name: telnet
-    port: 23
-    banner: Welcome to telnet
-    script: honeypot_scripts/telnet_script.py
+    rate: 1360.7041015625
+    avg_size: 1691902.5
+    err_prob: 0.7507323622703552
+  droprate_in: 0.1501464694738388
+  droprate_syn: 0.0750732347369194

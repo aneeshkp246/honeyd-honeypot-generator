@@ -4,7 +4,7 @@ RATE = float(os.getenv("RATE","5"))
 AVG_SIZE = float(os.getenv("SIZE","500"))
 ERR = float(os.getenv("ERR","0.05"))
 DELAY = max(0.01, 1.0/(RATE+1e-6))  # inter-arrival proxy
-LOGF = os.path.join(".", "log", "honeyd", "dns.log")
+LOGF = os.path.join(".", "log", "honeyd", "imap.log")
 def log(event, extra=None):
     try:
         with open(LOGF, "a") as f:
@@ -16,12 +16,12 @@ def maybe_fail():
 def main():
     log("start", {"rate": RATE, "avg_size": AVG_SIZE, "err": ERR})
 
-    # Respond with fixed A record-like line (not real DNS)
-    resp = "DNS honeypot response\n"
-    sys.stdout.write(resp)
+    sys.stdout.write("* OK IMAP4 ready\r\n")
     sys.stdout.flush()
-    log("dns_resp", {{"size": len(resp)}})
     time.sleep(DELAY)
+    sys.stdout.write("a001 OK LOGIN completed\r\n")
+    sys.stdout.flush()
+    log("imap_login", None)
 
 if __name__ == "__main__":
     main()
