@@ -4,7 +4,7 @@ RATE = float(os.getenv("RATE","5"))
 AVG_SIZE = float(os.getenv("SIZE","500"))
 ERR = float(os.getenv("ERR","0.05"))
 DELAY = max(0.01, 1.0/(RATE+1e-6))  # inter-arrival proxy
-LOGF = os.path.join(".", "log", "honeyd", "dns.log")
+LOGF = os.path.join(".", "log", "honeyd", "ssh.log")
 def log(event, extra=None):
     try:
         with open(LOGF, "a") as f:
@@ -16,12 +16,17 @@ def maybe_fail():
 def main():
     log("start", {"rate": RATE, "avg_size": AVG_SIZE, "err": ERR})
 
-    # Respond with fixed A record-like line (not real DNS)
-    resp = "DNS honeypot response\n"
-    sys.stdout.write(resp)
+    sys.stdout.write("SSH-2.0-OpenSSH_7.9\r\n")
     sys.stdout.flush()
-    log("dns_resp", {{"size": len(resp)}})
-    time.sleep(DELAY)
+    log("ssh_banner", None)
+    # Fake authentication prompt cycle
+    prompts = 1 + int(RATE) % 3
+    for i in range(prompts):
+        sys.stdout.write("Password: \r\n")
+        sys.stdout.flush()
+        time.sleep(DELAY)
+        log("ssh_auth_prompt", {{"idx": i}})
+    log("ssh_disconnect", None)
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,30 @@
 #!/usr/bin/env python3
-print("ftp honeypot placeholder")
-            with open(r'./log/honeyd/ftp.log','a') as f:
-    f.write("ftp connection
-")
+import os, sys, time, json, random
+RATE = float(os.getenv("RATE","5"))
+AVG_SIZE = float(os.getenv("SIZE","500"))
+ERR = float(os.getenv("ERR","0.05"))
+DELAY = max(0.01, 1.0/(RATE+1e-6))  # inter-arrival proxy
+LOGF = os.path.join(".", "log", "honeyd", "ftp.log")
+def log(event, extra=None):
+    try:
+        with open(LOGF, "a") as f:
+            f.write(json.dumps({"ts": time.time(), "event": event, **(extra or {})}) + "\n")
+    except Exception:
+        pass
+def maybe_fail():
+    return random.random() < ERR
+def main():
+    log("start", {"rate": RATE, "avg_size": AVG_SIZE, "err": ERR})
+
+    sys.stdout.write("220 FTP Server ready\r\n")
+    sys.stdout.flush()
+    time.sleep(DELAY)
+    sys.stdout.write("331 Please specify the password.\r\n")
+    sys.stdout.flush()
+    time.sleep(DELAY)
+    sys.stdout.write("230 Login successful.\r\n")
+    sys.stdout.flush()
+    log("ftp_login", None)
+
+if __name__ == "__main__":
+    main()
