@@ -66,7 +66,7 @@ echo "Installing build tools and dependencies..."
 # Install packages with retries and better error handling
 for i in {1..3}; do
     echo "Attempt $i to install base packages..."
-    if pacman -S --noconfirm base-devel git python python-pip libpcap libdnet libevent wget autoconf automake libtool flex bison make gcc; then
+    if pacman -S --noconfirm base-devel git python python-pip libpcap libdnet libevent wget autoconf automake libtool flex bison make gcc wireshark-cli tcpdump; then
         break
     else
         echo "Failed attempt $i, waiting 15 seconds before retry..."
@@ -518,6 +518,13 @@ echo "Setting up honeypot directories..."
 mkdir -p /usr/local/honeypot/{configs,scripts,logs}
 mkdir -p /var/log/honeyd
 
+# Create capture directory structure for Wireshark pcaps and honeyd logs
+echo "Setting up packet capture directories..."
+mkdir -p /capture/pcaps
+mkdir -p /capture/honeyd_logs
+chmod -R 755 /capture
+echo "Created capture directories: /capture/pcaps/ and /capture/honeyd_logs/"
+
 # Copy configuration and scripts from vagrant shared folder
 echo "Copying honeypot configuration and scripts..."
 if [ -f /vagrant/honeyd.conf ]; then
@@ -865,10 +872,84 @@ else
     echo "This is normal in some VM environments and won't affect honeyd functionality"
 fi
 
+# Create packet capture rotation script
+echo "Creating packet capture rotation script..."
+cat > /usr/local/bin/rotate-pcap.sh << 'EOF'
+#!/bin/bash
+# Script to rotate packet capture files
+PCAP_DIR="/capture/pcaps"
+MAX_FILES=100
+MAX_SIZE_MB=5000
+
+# Rotate by count
+file_count=$(ls -1 "$PCAP_DIR"/*.pcap 2>/dev/null | wc -l)
+if [ "$file_count" -gt "$MAX_FILES" ]; then
+    echo "Rotating old pcap files (count: $file_count)"
+    ls -1t "$PCAP_DIR"/*.pcap | tail -n +$((MAX_FILES + 1)) | xargs rm -f
+fi
+
+# Rotate by size
+total_size=$(du -sm "$PCAP_DIR" 2>/dev/null | cut -f1)
+if [ "$total_size" -gt "$MAX_SIZE_MB" ]; then
+    echo "Rotating old pcap files (size: ${total_size}MB)"
+    ls -1t "$PCAP_DIR"/*.pcap | tail -n 20 | xargs rm -f
+fi
+EOF
+chmod +x /usr/local/bin/rotate-pcap.sh
+
+# Create systemd service for tshark packet capture
+echo "Creating systemd service for tshark packet capture..."
+cat > /etc/systemd/system/tshark-capture.service << 'EOF'
+[Unit]
+Description=TShark Packet Capture Service
+After=network.target
+Wants=honeyd.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/local/bin/rotate-pcap.sh
+ExecStart=/usr/bin/tshark -i any -w /capture/pcaps/capture_%%Y%%m%%d_%%H%%M%%S.pcap -b duration:3600 -b files:50 -F pcap
+Restart=always
+RestartSec=10
+User=root
+Group=root
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tshark-capture
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Create systemd service to copy honeyd logs to capture directory
+echo "Creating systemd timer for honeyd log sync..."
+cat > /etc/systemd/system/honeyd-log-sync.service << 'EOF'
+[Unit]
+Description=Sync Honeyd Logs to Capture Directory
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'rsync -a --delete /var/log/honeyd/ /capture/honeyd_logs/ 2>/dev/null || cp -r /var/log/honeyd/* /capture/honeyd_logs/ 2>/dev/null'
+EOF
+
+cat > /etc/systemd/system/honeyd-log-sync.timer << 'EOF'
+[Unit]
+Description=Sync Honeyd Logs Every 5 Minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
+EOF
+
 # Reload systemd and start honeyd service
 echo "Starting honeyd service..."
 systemctl daemon-reload
 systemctl enable honeyd.service
+systemctl enable tshark-capture.service
+systemctl enable honeyd-log-sync.timer
 
 # Check if honeyd configuration is valid before starting
 if [ -f /usr/local/honeypot/configs/honeyd.conf ]; then
@@ -883,12 +964,38 @@ else
     echo "Warning: honeyd configuration file not found. Service enabled but not started."
 fi
 
+# Start packet capture service
+echo "Starting tshark packet capture service..."
+systemctl start tshark-capture.service
+
+# Start log sync timer
+echo "Starting honeyd log sync timer..."
+systemctl start honeyd-log-sync.timer
+
 # Create a simple status check script
 cat > /usr/local/bin/honeypot-status << 'EOF'
 #!/bin/bash
 echo "=== Honeypot Status ==="
 echo "Honeyd service status:"
 systemctl status honeyd.service --no-pager -l
+
+echo -e "\nTShark capture service status:"
+systemctl status tshark-capture.service --no-pager -l
+
+echo -e "\nHoneyd log sync timer status:"
+systemctl status honeyd-log-sync.timer --no-pager -l
+
+echo -e "\nPacket capture files:"
+ls -lh /capture/pcaps/*.pcap 2>/dev/null | tail -10 || echo "No pcap files found"
+echo -n "Total pcap files: "
+ls -1 /capture/pcaps/*.pcap 2>/dev/null | wc -l
+echo -n "Total pcap size: "
+du -sh /capture/pcaps 2>/dev/null | cut -f1
+
+echo -e "\nHoneyd log files in capture directory:"
+ls -lh /capture/honeyd_logs/*.log 2>/dev/null | tail -10 || echo "No log files found"
+echo -n "Total log files: "
+ls -1 /capture/honeyd_logs/*.log 2>/dev/null | wc -l
 
 echo -e "\nHoneyd process:"
 ps aux | grep honeyd | grep -v grep
@@ -979,6 +1086,113 @@ EOF
 
 chmod +x /usr/local/bin/honeypot-test
 
+# Create a packet capture management script
+cat > /usr/local/bin/pcap-manager << 'EOF'
+#!/bin/bash
+# Packet capture management script
+
+PCAP_DIR="/capture/pcaps"
+LOG_DIR="/capture/honeyd_logs"
+
+function show_help() {
+    echo "Usage: pcap-manager [OPTION]"
+    echo "Manage packet captures and honeyd logs"
+    echo ""
+    echo "Options:"
+    echo "  list              List all packet capture files"
+    echo "  recent [N]        Show N most recent captures (default: 10)"
+    echo "  analyze <file>    Analyze a specific pcap file with tshark"
+    echo "  stats             Show capture statistics"
+    echo "  clean             Clean old captures (keeps last 50 files)"
+    echo "  stop              Stop packet capture service"
+    echo "  start             Start packet capture service"
+    echo "  restart           Restart packet capture service"
+    echo "  logs              Show honeyd logs directory"
+    echo "  help              Show this help message"
+}
+
+case "$1" in
+    list)
+        echo "=== All Packet Captures ==="
+        ls -lh "$PCAP_DIR"/*.pcap 2>/dev/null || echo "No pcap files found"
+        ;;
+    recent)
+        N=${2:-10}
+        echo "=== $N Most Recent Packet Captures ==="
+        ls -lht "$PCAP_DIR"/*.pcap 2>/dev/null | head -n "$N" || echo "No pcap files found"
+        ;;
+    analyze)
+        if [ -z "$2" ]; then
+            echo "Error: Please specify a pcap file"
+            echo "Usage: pcap-manager analyze <filename>"
+            exit 1
+        fi
+        FILE="$2"
+        if [ ! -f "$FILE" ] && [ -f "$PCAP_DIR/$FILE" ]; then
+            FILE="$PCAP_DIR/$FILE"
+        fi
+        if [ ! -f "$FILE" ]; then
+            echo "Error: File not found: $FILE"
+            exit 1
+        fi
+        echo "=== Analyzing: $FILE ==="
+        echo ""
+        echo "File Info:"
+        capinfos "$FILE" 2>/dev/null || echo "capinfos not available"
+        echo ""
+        echo "Top 20 Packets:"
+        tshark -r "$FILE" -c 20
+        echo ""
+        echo "Protocol Hierarchy:"
+        tshark -r "$FILE" -q -z io,phs
+        ;;
+    stats)
+        echo "=== Packet Capture Statistics ==="
+        echo "Capture directory: $PCAP_DIR"
+        echo "Total files: $(ls -1 "$PCAP_DIR"/*.pcap 2>/dev/null | wc -l)"
+        echo "Total size: $(du -sh "$PCAP_DIR" 2>/dev/null | cut -f1)"
+        echo "Oldest capture: $(ls -lt "$PCAP_DIR"/*.pcap 2>/dev/null | tail -1 | awk '{print $9, $6, $7, $8}')"
+        echo "Newest capture: $(ls -lt "$PCAP_DIR"/*.pcap 2>/dev/null | head -1 | awk '{print $9, $6, $7, $8}')"
+        echo ""
+        echo "=== TShark Capture Service Status ==="
+        systemctl status tshark-capture.service --no-pager
+        ;;
+    clean)
+        echo "Cleaning old packet captures..."
+        /usr/local/bin/rotate-pcap.sh
+        echo "Done. Current files: $(ls -1 "$PCAP_DIR"/*.pcap 2>/dev/null | wc -l)"
+        ;;
+    stop)
+        echo "Stopping packet capture service..."
+        systemctl stop tshark-capture.service
+        ;;
+    start)
+        echo "Starting packet capture service..."
+        systemctl start tshark-capture.service
+        ;;
+    restart)
+        echo "Restarting packet capture service..."
+        systemctl restart tshark-capture.service
+        ;;
+    logs)
+        echo "=== Honeyd Logs Directory ==="
+        echo "Log directory: $LOG_DIR"
+        ls -lh "$LOG_DIR" 2>/dev/null || echo "No log files found"
+        ;;
+    help|--help|-h|"")
+        show_help
+        ;;
+    *)
+        echo "Error: Unknown option: $1"
+        echo ""
+        show_help
+        exit 1
+        ;;
+esac
+EOF
+
+chmod +x /usr/local/bin/pcap-manager
+
 echo "=== Provisioning Complete ==="
 echo "Performing final system check..."
 
@@ -992,6 +1206,10 @@ echo -n "- pip (venv): "
 /opt/honeypot-venv/bin/pip --version 2>/dev/null && echo "✓" || echo "✗"
 echo -n "- honeyd: "
 honeyd -h 2>/dev/null >/dev/null && echo "✓" || echo "✗"
+echo -n "- tshark: "
+tshark --version 2>/dev/null >/dev/null && echo "✓" || echo "✗"
+echo -n "- tcpdump: "
+tcpdump --version 2>/dev/null && echo "✓" || echo "✗"
 echo -n "- git: "
 git --version 2>/dev/null && echo "✓" || echo "✗"
 
@@ -1034,6 +1252,14 @@ echo "- Service-specific logs: /var/log/honeyd/"
 echo "- Systemd service: honeyd.service"
 echo "- Python virtual environment: /opt/honeypot-venv"
 echo ""
+echo "Packet Capture Configuration:"
+echo "- TShark/Wireshark installed for packet capture"
+echo "- Packet captures: /capture/pcaps/"
+echo "- Honeyd logs backup: /capture/honeyd_logs/"
+echo "- Systemd service: tshark-capture.service"
+echo "- Log sync timer: honeyd-log-sync.timer"
+echo "- Capture rotation: Automatic (50 files, 1 hour per file)"
+echo ""
 echo "Supported services:"
 echo "- SSH (port 22)"
 echo "- Telnet (port 23)"
@@ -1047,8 +1273,13 @@ echo ""
 echo "Useful commands:"
 echo "- Check status: sudo /usr/local/bin/honeypot-status"
 echo "- Test connectivity: sudo /usr/local/bin/honeypot-test"
+echo "- Manage captures: sudo /usr/local/bin/pcap-manager [list|recent|analyze|stats|clean]"
 echo "- View logs: sudo journalctl -u honeyd -f"
-echo "- Restart service: sudo systemctl restart honeyd"
+echo "- View capture logs: sudo journalctl -u tshark-capture -f"
+echo "- Restart honeyd: sudo systemctl restart honeyd"
+echo "- Restart capture: sudo systemctl restart tshark-capture"
+echo "- List pcap files: ls -lh /capture/pcaps/"
+echo "- Analyze pcap: tshark -r /capture/pcaps/<filename>.pcap"
 echo "- Run Python with venv: /usr/local/bin/honeypot-run-python python"
 echo "- Activate venv manually: source /opt/honeypot-venv/bin/activate"
 echo ""
@@ -1056,6 +1287,9 @@ echo "The honeypot is configured with traffic parameters:"
 echo "- RATE: Network traffic rate simulation"
 echo "- SIZE: Packet size simulation" 
 echo "- ERR: Error rate simulation"
+echo ""
+echo "Packet captures are automatically rotated and stored in /capture/pcaps/"
+echo "Honeyd logs are synced to /capture/honeyd_logs/ every 5 minutes"
 echo ""
 echo "Make sure your network routing is configured to direct traffic to this VM."
 echo ""
