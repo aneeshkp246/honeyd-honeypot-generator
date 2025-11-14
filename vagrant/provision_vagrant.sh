@@ -145,7 +145,7 @@ if ! command -v honeyd >/dev/null 2>&1; then
     
     mkdir -p /usr/local/bin
     cat > /usr/local/bin/honeyd << 'EOF'
-#!/opt/honeypot-venv/bin/python
+#!/opt/honeypot-venv/bin/python -u
 import sys
 import time
 import signal
@@ -156,6 +156,10 @@ import re
 import subprocess
 import os
 from datetime import datetime
+
+# Ensure unbuffered output
+sys.stdout.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
 
 class SimpleHoneyd:
     def __init__(self, config_file=None):
@@ -245,7 +249,8 @@ class SimpleHoneyd:
             log_entry += f" (template: {template})"
         if data:
             log_entry += f" - Data: {data[:100]}"
-        print(log_entry)
+        print(log_entry, flush=True)
+        sys.stdout.flush()
         
         # Also write to service-specific log file
         try:
@@ -254,6 +259,7 @@ class SimpleHoneyd:
             os.makedirs(log_dir, exist_ok=True)
             with open(f'{log_dir}/{service_name}.log', 'a') as f:
                 f.write(log_entry + '\n')
+                f.flush()
         except:
             pass
     
@@ -282,53 +288,76 @@ class SimpleHoneyd:
     def handle_tcp_service(self, client_socket, client_addr, port, service_config, template_name):
         """Handle TCP connections for configured services"""
         try:
+            # Log initial connection
             self.log_interaction(client_addr, port, 'TCP', template=template_name)
             
-            # Run the service script if configured
+            # Run the service script if configured to send banner/greeting
             if service_config and service_config.get('script'):
                 response = self.run_service_script(
                     service_config['script'], client_addr, port, 'TCP'
                 )
                 if response:
-                    client_socket.send(response.encode('utf-8', errors='ignore'))
+                    try:
+                        client_socket.send(response.encode('utf-8', errors='ignore'))
+                    except:
+                        pass
             
-            # Keep connection alive for interaction
-            client_socket.settimeout(30.0)
+            # Keep connection alive for interaction - increased timeout for slower scans
+            client_socket.settimeout(60.0)
+            
+            # Wait a bit for initial data
+            time.sleep(0.5)
+            
             while self.running:
                 try:
-                    data = client_socket.recv(1024)
+                    data = client_socket.recv(4096)
                     if not data:
                         break
                     
+                    # Log the received data
                     self.log_interaction(
                         client_addr, port, 'TCP', 
                         data.decode('utf-8', errors='ignore'), template_name
                     )
                     
-                    # Echo back or send appropriate response
+                    # Send response if script configured
                     if service_config and service_config.get('script'):
                         response = self.run_service_script(
                             service_config['script'], client_addr, port, 'TCP'
                         )
                         if response:
-                            client_socket.send(response.encode('utf-8', errors='ignore'))
+                            try:
+                                client_socket.send(response.encode('utf-8', errors='ignore'))
+                            except:
+                                break
                     
                 except socket.timeout:
                     break
-                except:
+                except ConnectionResetError:
+                    break
+                except BrokenPipeError:
+                    break
+                except Exception as e:
+                    if self.running:
+                        print(f"[DEBUG] Connection error on port {port}: {e}", flush=True)
                     break
                     
         except Exception as e:
-            print(f"[ERROR] TCP service handler error: {e}")
+            print(f"[ERROR] TCP service handler error on port {port}: {e}", flush=True)
+            sys.stdout.flush()
         finally:
-            client_socket.close()
+            try:
+                client_socket.close()
+            except:
+                pass
     
     def handle_udp_service(self, server_socket, port, service_config, template_name):
         """Handle UDP connections for configured services"""
         try:
             while self.running:
                 try:
-                    data, addr = server_socket.recvfrom(1024)
+                    data, addr = server_socket.recvfrom(4096)
+                    # Log the UDP interaction
                     self.log_interaction(
                         addr, port, 'UDP', 
                         data.decode('utf-8', errors='ignore'), template_name
@@ -340,17 +369,22 @@ class SimpleHoneyd:
                             service_config['script'], addr, port, 'UDP'
                         )
                         if response:
-                            server_socket.sendto(response.encode('utf-8', errors='ignore'), addr)
+                            try:
+                                server_socket.sendto(response.encode('utf-8', errors='ignore'), addr)
+                            except:
+                                pass
                     
                 except socket.timeout:
                     continue
                 except Exception as e:
                     if self.running:
-                        print(f"[ERROR] UDP service error on port {port}: {e}")
+                        print(f"[ERROR] UDP service error on port {port}: {e}", flush=True)
+                        sys.stdout.flush()
                     break
                     
         except Exception as e:
-            print(f"[ERROR] UDP service handler error: {e}")
+            print(f"[ERROR] UDP service handler error: {e}", flush=True)
+            sys.stdout.flush()
     
     def start_tcp_service(self, port, service_config, template_name):
         """Start a TCP service on specified port"""
@@ -527,14 +561,30 @@ echo "Created capture directories: /capture/pcaps/ and /capture/honeyd_logs/"
 
 # Copy configuration and scripts from vagrant shared folder
 echo "Copying honeypot configuration and scripts..."
+
+# Detect the VM's actual IP address (prefer eth1, fallback to eth0)
+VM_IP=$(ip -4 addr show eth1 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -1)
+if [ -z "$VM_IP" ]; then
+    VM_IP=$(ip -4 addr show eth0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -1)
+fi
+if [ -z "$VM_IP" ]; then
+    VM_IP="192.168.56.101"  # Fallback default
+fi
+
+echo "Detected VM IP address: $VM_IP"
+
 if [ -f /vagrant/honeyd.conf ]; then
     cp /vagrant/honeyd.conf /usr/local/honeypot/configs/honeyd.conf
-    echo "Copied honeyd.conf"
+    echo "Copied honeyd.conf from /vagrant"
+    
+    # Update the bind statements to use the actual VM IP
+    echo "Updating honeyd.conf to bind to actual VM IP: $VM_IP"
+    sed -i "s/bind [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+ /bind $VM_IP /g" /usr/local/honeypot/configs/honeyd.conf
 else
     echo "Warning: honeyd.conf not found in /vagrant, creating default config..."
-    cat > /usr/local/honeypot/configs/honeyd.conf << 'EOF'
+    cat > /usr/local/honeypot/configs/honeyd.conf << EOF
 # Default honeyd configuration with traffic parameters
-# Creates virtual hosts from 10.10.10.10 to 10.10.10.17
+# Automatically configured for VM IP: $VM_IP
 
 create default
 set default personality "Linux 2.6.x"
@@ -546,24 +596,21 @@ create linux_host
 set linux_host personality "Linux 2.6.x"
 add linux_host tcp port 22 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/ssh_script.py"
 add linux_host tcp port 23 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/telnet_script.py"
-add linux_host tcp port 80 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/http_script.py"
+add linux_host tcp port 8080 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/http_script.py"
 add linux_host tcp port 443 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/https_script.py"
 add linux_host tcp port 21 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/ftp_script.py"
 add linux_host tcp port 53 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/dns_script.py"
 add linux_host udp port 53 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/dns_script.py"
 add linux_host tcp port 110 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/pop3_script.py"
 add linux_host tcp port 143 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/imap_script.py"
+add linux_host tcp port 25 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/smtp_script.py"
+add linux_host udp port 161 "RATE=1000.0 SIZE=1024.0 ERR=0.1 python3 /usr/local/honeypot/scripts/snmp_script.py"
 
-bind 10.10.10.10 linux_host
-bind 10.10.10.11 linux_host
-bind 10.10.10.12 linux_host
-bind 10.10.10.13 linux_host
-bind 10.10.10.14 linux_host
-bind 10.10.10.15 linux_host
-bind 10.10.10.16 linux_host
-bind 10.10.10.17 linux_host
+bind $VM_IP linux_host
 EOF
 fi
+
+echo "Honeyd configuration bound to IP: $VM_IP"
 
 if [ -d /vagrant/honeypot_scripts ]; then
     cp -r /vagrant/honeypot_scripts/* /usr/local/honeypot/scripts/
@@ -796,6 +843,61 @@ if __name__ == "__main__":
     time.sleep(1)
 EOF
 
+    # SMTP Script
+    cat > /usr/local/honeypot/scripts/smtp_script.py << 'EOF'
+#!/opt/honeypot-venv/bin/python
+import sys
+import time
+import datetime
+import os
+
+def log_interaction(message):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_dir = '/var/log/honeyd'
+    os.makedirs(log_dir, exist_ok=True)
+    with open(f'{log_dir}/smtp.log', 'a') as f:
+        f.write(f"[{timestamp}] {message}\n")
+    print(f"[SMTP] {message}")
+
+if __name__ == "__main__":
+    client_ip = sys.argv[1] if len(sys.argv) > 1 else os.getenv('CLIENT_IP', 'unknown')
+    client_port = sys.argv[2] if len(sys.argv) > 2 else os.getenv('CLIENT_PORT', 'unknown')
+    
+    log_interaction(f"SMTP connection attempt from {client_ip}:{client_port}")
+    print("220 mail.example.com ESMTP Postfix")
+    time.sleep(1)
+EOF
+
+    # SNMP Script
+    cat > /usr/local/honeypot/scripts/snmp_script.py << 'EOF'
+#!/opt/honeypot-venv/bin/python
+import sys
+import time
+import datetime
+import os
+
+def log_interaction(message):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_dir = '/var/log/honeyd'
+    os.makedirs(log_dir, exist_ok=True)
+    with open(f'{log_dir}/snmp.log', 'a') as f:
+        f.write(f"[{timestamp}] {message}\n")
+    print(f"[SNMP] {message}")
+
+if __name__ == "__main__":
+    client_ip = sys.argv[1] if len(sys.argv) > 1 else os.getenv('CLIENT_IP', 'unknown')
+    client_port = sys.argv[2] if len(sys.argv) > 2 else os.getenv('CLIENT_PORT', 'unknown')
+    protocol = os.getenv('SERVICE_PROTOCOL', 'UDP')
+    
+    log_interaction(f"SNMP {protocol} query from {client_ip}:{client_port}")
+    
+    # Simple SNMP response (placeholder)
+    if protocol == 'UDP':
+        print("SNMP UDP Response")
+    else:
+        print("SNMP TCP Response")
+EOF
+
     chmod +x /usr/local/honeypot/scripts/*.py
     echo "Created default honeypot scripts for all services"
 fi
@@ -815,7 +917,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/honeyd -f /usr/local/honeypot/configs/honeyd.conf -d -i eth0
+ExecStart=/bin/bash -c '/usr/bin/honeyd -f /usr/local/honeypot/configs/honeyd.conf -d -i eth0 2>&1 | tee -a /var/log/honeyd/all_logs.log'
 Restart=always
 RestartSec=5
 User=root
@@ -825,6 +927,7 @@ StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=honeyd
 Environment=PYTHONPATH=/opt/honeypot-venv/lib/python3.11/site-packages
+Environment=PYTHONUNBUFFERED=1
 
 [Install]
 WantedBy=multi-user.target
@@ -897,6 +1000,131 @@ fi
 EOF
 chmod +x /usr/local/bin/rotate-pcap.sh
 
+# Create the IMDS simulator script
+echo "Creating IMDS simulator script..."
+cat > /usr/local/bin/imds_simulator.py << 'EOF'
+#!/opt/honeypot-venv/bin/python
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
+import datetime
+import os
+
+class Handler(BaseHTTPRequestHandler):
+    def log_interaction(self, message):
+        """Log IMDS interactions"""
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log_dir = '/var/log/honeyd'
+        os.makedirs(log_dir, exist_ok=True)
+        with open(f'{log_dir}/imds.log', 'a') as f:
+            f.write(f"[{timestamp}] {message}\n")
+        print(f"[IMDS] {message}")
+
+    def do_GET(self):
+        client_ip = self.client_address[0]
+        self.log_interaction(f"IMDS GET request from {client_ip}: {self.path}")
+        
+        if self.path == "/latest/meta-data/":
+            resp = "ami-id\nhostname\ninstance-id\ninstance-type\nlocal-hostname\nlocal-ipv4\nmac\nnetwork/\nreservation-id\nsecurity-groups\niam/\n"
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(resp.encode())
+        elif self.path == "/latest/meta-data/instance-id":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"i-0abcd1234ef567890")
+        elif self.path == "/latest/meta-data/iam/security-credentials/":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"MyTestRole")
+        elif self.path == "/latest/meta-data/iam/security-credentials/MyTestRole":
+            cred = {
+                "Code": "Success",
+                "LastUpdated": "2025-10-26T10:12:00Z",
+                "Type": "AWS-HMAC",
+                "AccessKeyId": "ASIAIOSFODNN7EXAMPLE",
+                "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+                "Token": "EXAMPLETOKENSTRING",
+                "Expiration": "2025-10-26T16:12:00Z"
+            }
+            resp = json.dumps(cred)
+            self.send_response(200)
+            self.send_header("Content-Type","application/json")
+            self.end_headers()
+            self.wfile.write(resp.encode())
+        elif self.path == "/latest/meta-data/ami-id":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"ami-0123456789abcdef0")
+        elif self.path == "/latest/meta-data/hostname":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"ip-192-168-56-101.compute.internal")
+        elif self.path == "/latest/meta-data/instance-type":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"t3.medium")
+        elif self.path == "/latest/meta-data/local-hostname":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"ip-192-168-56-101.compute.internal")
+        elif self.path == "/latest/meta-data/local-ipv4":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"192.168.56.101")
+        elif self.path == "/latest/meta-data/mac":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"08:00:27:12:34:56")
+        elif self.path == "/latest/meta-data/reservation-id":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"r-0123456789abcdef0")
+        elif self.path == "/latest/meta-data/security-groups":
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"default\nssh-access\nweb-access")
+        else:
+            self.send_response(404)
+            self.end_headers()
+            self.wfile.write(b"404 Not Found")
+
+def run(server_class=HTTPServer, handler_class=Handler, port=80):
+    server_address = ('', port)
+    httpd = server_class(server_address, handler_class)
+    print(f"Starting IMDS simulator on port {port}")
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    run()
+EOF
+
+chmod +x /usr/local/bin/imds_simulator.py
+
+# Create systemd service for IMDS simulator
+echo "Creating systemd service for IMDS simulator..."
+cat > /etc/systemd/system/imds-simulator.service << 'EOF'
+[Unit]
+Description=AWS IMDS Simulator Service
+After=network.target
+Wants=honeyd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/imds_simulator.py
+Restart=always
+RestartSec=5
+User=root
+Group=root
+WorkingDirectory=/usr/local/honeypot
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=imds-simulator
+Environment=PYTHONPATH=/opt/honeypot-venv/lib/python3.11/site-packages
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 # Create systemd service for tshark packet capture
 echo "Creating systemd service for tshark packet capture..."
 cat > /etc/systemd/system/tshark-capture.service << 'EOF'
@@ -949,6 +1177,7 @@ echo "Starting honeyd service..."
 systemctl daemon-reload
 systemctl enable honeyd.service
 systemctl enable tshark-capture.service
+systemctl enable imds-simulator.service
 systemctl enable honeyd-log-sync.timer
 
 # Check if honeyd configuration is valid before starting
@@ -968,6 +1197,10 @@ fi
 echo "Starting tshark packet capture service..."
 systemctl start tshark-capture.service
 
+# Start IMDS simulator service
+echo "Starting IMDS simulator service..."
+systemctl start imds-simulator.service
+
 # Start log sync timer
 echo "Starting honeyd log sync timer..."
 systemctl start honeyd-log-sync.timer
@@ -981,6 +1214,9 @@ systemctl status honeyd.service --no-pager -l
 
 echo -e "\nTShark capture service status:"
 systemctl status tshark-capture.service --no-pager -l
+
+echo -e "\nIMDS simulator service status:"
+systemctl status imds-simulator.service --no-pager -l
 
 echo -e "\nHoneyd log sync timer status:"
 systemctl status honeyd-log-sync.timer --no-pager -l
@@ -1020,6 +1256,14 @@ journalctl -u honeyd -n 10 --no-pager
 echo -e "\nHoneypot log files:"
 ls -la /var/log/honeyd/ 2>/dev/null || echo "No log files found"
 
+echo -e "\nAll logs aggregated file:"
+if [ -f /var/log/honeyd/all_logs.log ]; then
+    echo "Last 20 lines of all_logs.log:"
+    tail -20 /var/log/honeyd/all_logs.log
+else
+    echo "all_logs.log not found"
+fi
+
 echo -e "\nService-specific logs (last 5 lines each):"
 for log in /var/log/honeyd/*.log; do
     if [ -f "$log" ]; then
@@ -1051,11 +1295,13 @@ services=(
     "22:SSH"
     "23:Telnet"
     "53:DNS"
-    "80:HTTP"
+    "8080:HTTP"
     "443:HTTPS"
     "21:FTP"
     "110:POP3"
     "143:IMAP"
+    "25:SMTP"
+    "161:SNMP"
 )
 
 for service in "${services[@]}"; do
@@ -1069,6 +1315,38 @@ for service in "${services[@]}"; do
         echo "✗ NOT RESPONDING"
     fi
 done
+
+echo -e "\n=== IMDS Simulator Test ==="
+echo -n "Testing IMDS simulator (port 80): "
+if timeout 3 nc -z localhost 80 2>/dev/null; then
+    echo "✓ LISTENING"
+    
+    # Test specific IMDS endpoints
+    echo "Testing IMDS endpoints:"
+    
+    echo -n "  - /latest/meta-data/: "
+    if curl -s --connect-timeout 3 http://localhost/latest/meta-data/ >/dev/null 2>&1; then
+        echo "✓ RESPONDING"
+    else
+        echo "✗ NOT RESPONDING"
+    fi
+    
+    echo -n "  - /latest/meta-data/instance-id: "
+    if curl -s --connect-timeout 3 http://localhost/latest/meta-data/instance-id >/dev/null 2>&1; then
+        echo "✓ RESPONDING"
+    else
+        echo "✗ NOT RESPONDING"
+    fi
+    
+    echo -n "  - /latest/meta-data/iam/security-credentials/: "
+    if curl -s --connect-timeout 3 http://localhost/latest/meta-data/iam/security-credentials/ >/dev/null 2>&1; then
+        echo "✓ RESPONDING"
+    else
+        echo "✗ NOT RESPONDING"
+    fi
+else
+    echo "✗ NOT LISTENING"
+fi
 
 echo -e "\nTesting honeypot IP ranges:"
 # Test configured IP (from your config: 10.10.10.36)
@@ -1107,6 +1385,9 @@ function show_help() {
     echo "  stop              Stop packet capture service"
     echo "  start             Start packet capture service"
     echo "  restart           Restart packet capture service"
+    echo "  imds-stop         Stop IMDS simulator service"
+    echo "  imds-start        Start IMDS simulator service"
+    echo "  imds-restart      Restart IMDS simulator service"
     echo "  logs              Show honeyd logs directory"
     echo "  help              Show this help message"
 }
@@ -1179,6 +1460,18 @@ case "$1" in
         echo "Log directory: $LOG_DIR"
         ls -lh "$LOG_DIR" 2>/dev/null || echo "No log files found"
         ;;
+    imds-stop)
+        echo "Stopping IMDS simulator service..."
+        systemctl stop imds-simulator.service
+        ;;
+    imds-start)
+        echo "Starting IMDS simulator service..."
+        systemctl start imds-simulator.service
+        ;;
+    imds-restart)
+        echo "Restarting IMDS simulator service..."
+        systemctl restart imds-simulator.service
+        ;;
     help|--help|-h|"")
         show_help
         ;;
@@ -1232,6 +1525,8 @@ required_scripts=(
     "ftp_script.py"
     "pop3_script.py"
     "imap_script.py"
+    "smtp_script.py"
+    "snmp_script.py"
 )
 
 for script in "${required_scripts[@]}"; do
@@ -1248,9 +1543,17 @@ echo "Enhanced honeypot has been set up with the following:"
 echo "- Honeyd installed and configured with traffic parameter support"
 echo "- Configuration file: /usr/local/honeypot/configs/honeyd.conf"
 echo "- Scripts directory: /usr/local/honeypot/scripts/"
+echo "- Aggregated log file: /var/log/honeyd/all_logs.log"
 echo "- Service-specific logs: /var/log/honeyd/"
 echo "- Systemd service: honeyd.service"
 echo "- Python virtual environment: /opt/honeypot-venv"
+echo ""
+echo "IMDS Simulator Configuration:"
+echo "- AWS Instance Metadata Service (IMDS) simulator on port 80"
+echo "- Responds to AWS metadata requests like /latest/meta-data/"
+echo "- Includes IAM security credentials simulation"
+echo "- Systemd service: imds-simulator.service"
+echo "- IMDS logs: /var/log/honeyd/imds.log"
 echo ""
 echo "Packet Capture Configuration:"
 echo "- TShark/Wireshark installed for packet capture"
@@ -1264,20 +1567,26 @@ echo "Supported services:"
 echo "- SSH (port 22)"
 echo "- Telnet (port 23)"
 echo "- DNS (port 53, TCP & UDP)"
-echo "- HTTP (port 80)"
+echo "- HTTP (port 8080) - honeyd service"
 echo "- HTTPS (port 443)"
 echo "- FTP (port 21)"
 echo "- POP3 (port 110)"
 echo "- IMAP (port 143)"
+echo "- SMTP (port 25)"
+echo "- SNMP (port 161, UDP)"
+echo "- IMDS Simulator (port 80) - AWS metadata service"
 echo ""
 echo "Useful commands:"
 echo "- Check status: sudo /usr/local/bin/honeypot-status"
 echo "- Test connectivity: sudo /usr/local/bin/honeypot-test"
 echo "- Manage captures: sudo /usr/local/bin/pcap-manager [list|recent|analyze|stats|clean]"
+echo "- View aggregated logs: tail -f /var/log/honeyd/all_logs.log"
 echo "- View logs: sudo journalctl -u honeyd -f"
 echo "- View capture logs: sudo journalctl -u tshark-capture -f"
+echo "- View IMDS logs: sudo journalctl -u imds-simulator -f"
 echo "- Restart honeyd: sudo systemctl restart honeyd"
 echo "- Restart capture: sudo systemctl restart tshark-capture"
+echo "- Restart IMDS: sudo systemctl restart imds-simulator"
 echo "- List pcap files: ls -lh /capture/pcaps/"
 echo "- Analyze pcap: tshark -r /capture/pcaps/<filename>.pcap"
 echo "- Run Python with venv: /usr/local/bin/honeypot-run-python python"
